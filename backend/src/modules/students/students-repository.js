@@ -50,6 +50,20 @@ const addOrUpdateStudent = async (payload) => {
     return rows[0];
 }
 
+const findClassByName = async (className) => {
+    const query = "SELECT name FROM classes WHERE name ILIKE $1 LIMIT 1";
+    const queryParams = [className];
+    const { rows } = await processDBRequest({ query, queryParams });
+    return rows[0];
+}
+
+const findSectionByName = async (sectionName) => {
+    const query = "SELECT name FROM sections WHERE name ILIKE $1 LIMIT 1";
+    const queryParams = [sectionName];
+    const { rows } = await processDBRequest({ query, queryParams });
+    return rows[0];
+}
+
 const findStudentDetail = async (id) => {
     const query = `
         SELECT
@@ -115,6 +129,8 @@ module.exports = {
     getRoleId,
     findAllStudents,
     addOrUpdateStudent,
+    findClassByName,
+    findSectionByName,
     findStudentDetail,
     findStudentToSetStatus,
     findStudentToUpdate

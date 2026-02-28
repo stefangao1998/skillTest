@@ -1,7 +1,9 @@
 const { env } = require("./config");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
-  secure: true,
+  secure: isProduction,
   sameSite: "lax",
   domain: env.COOKIE_DOMAIN,
 };
